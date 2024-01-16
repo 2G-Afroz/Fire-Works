@@ -4,8 +4,8 @@
 #define WINDOW_WIDTH 850
 #define WINDOW_HEIGHT 850
 
-// Class for Cracker
-class Cracker {
+// Class for Particle
+class Particle {
   private:
     Vector2 pos;
     Color color;
@@ -13,11 +13,11 @@ class Cracker {
     float accn;
     int size = 2;
   public:
-    Cracker(){
-      this->pos = {(float)GetRandomValue(0, WINDOW_WIDTH), WINDOW_HEIGHT};
+    Particle(Vector2 pos, float velocity, float accn){
       this->color = ColorFromHSV(GetRandomValue(0, 360), 1, 1);
-      velocity = GetRandomValue(10, 15)/100.0f;
-      accn = GetRandomValue(10, 15);
+      this->pos = pos;
+      this->velocity = velocity;
+      this->accn = accn;
     }
 
     void show(){
@@ -41,13 +41,16 @@ int main() {
   SetTargetFPS(60);
 
   // Initializing variables
-  std::vector<Cracker> crackers;
-  crackers.push_back(Cracker());
+  std::vector<Particle> crackers;
 
   // Main game loop
   while (!WindowShouldClose()) {
-      if(GetRandomValue(0, 10) < 4)
-        crackers.push_back(Cracker());
+      if(GetRandomValue(0, 10) < 2)
+        crackers.push_back(
+          Particle(
+            {(float)GetRandomValue(0, WINDOW_WIDTH), WINDOW_HEIGHT}, 
+            GetRandomValue(13, 18)/100.0f, GetRandomValue(13, 18)
+            ));
 
       // Draw
       BeginDrawing();
