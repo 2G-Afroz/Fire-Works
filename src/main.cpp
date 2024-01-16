@@ -1,7 +1,6 @@
 // main.cpp
 #include <raylib.h>
 #include <vector>
-#include <iostream>
 #define WINDOW_WIDTH 850
 #define WINDOW_HEIGHT 850
 
@@ -75,7 +74,7 @@ void explode(std::vector<Particle> &exploders, Vector2 pos, Color color){
                           pos,
                           //{0, GetRandomValue(100, 120)/1000.0f},
                           {0, 0.5},
-                          {GetRandomValue(-800, 800)/100.0f, (float)GetRandomValue(-400, 1200)/100.0f},
+                          {GetRandomValue(-800, 800)/91.0f, (float)GetRandomValue(-400, 1200)/91.0f},
                           color,
                           true
                         ));
@@ -91,11 +90,12 @@ int main() {
   // Initializing variables
   std::vector<Particle> crackers;
   std::vector<Particle> exploders;
+  RenderTexture2D canvas = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
 
   // Main game loop
   while (!WindowShouldClose()) {
     // Adding crackers
-    if(GetRandomValue(0, 10) < 2)
+    if(GetRandomValue(0, 100) < 5)
       crackers.push_back(
         Particle(
           {(float)GetRandomValue(0, WINDOW_WIDTH), WINDOW_HEIGHT}, 
@@ -105,33 +105,37 @@ int main() {
           false
         ));
 
+    // Drawing on Texture
+    BeginTextureMode(canvas);
+      DrawRectangle(0,0,WINDOW_WIDTH, WINDOW_HEIGHT, ColorAlpha(BLACK, 0.5));
+      DrawText("Hello, 2G-Afroz!", 10, 10, 20, WHITE);
+
+      // Crackers Loop
+      for(int i = 0; i < crackers.size(); i++){
+        crackers.at(i).update();
+        crackers.at(i).show();
+        if(crackers.at(i).getAccn().y <= 0){
+          // remeove that cracker;
+          explode(exploders, crackers.at(i).getPos(), crackers.at(i).getColor());
+          crackers.erase(crackers.begin() + i);
+        }
+      }
+
+      // Exploders Loop
+      for(int i = 0; i < exploders.size(); i++){
+        exploders.at(i).update();
+        exploders.at(i).show();
+
+        if(exploders.at(i).getAlpha() <= 0.0f){
+          // Remove that exploder-particle
+          exploders.erase(exploders.begin() + i);
+        }
+      }
+    EndTextureMode();
     // Draw
     BeginDrawing();
-    ClearBackground(BLACK);
-    DrawText("Hello, 2G-Afroz!", 10, 10, 20, WHITE);
-
-    // Crackers Loop
-    for(int i = 0; i < crackers.size(); i++){
-      crackers.at(i).update();
-      crackers.at(i).show();
-      if(crackers.at(i).getAccn().y <= 0){
-        // remeove that cracker;
-        explode(exploders, crackers.at(i).getPos(), crackers.at(i).getColor());
-        crackers.erase(crackers.begin() + i);
-      }
-    }
-
-    // Exploders Loop
-    for(int i = 0; i < exploders.size(); i++){
-      exploders.at(i).update();
-      exploders.at(i).show();
-
-      if(exploders.at(i).getAlpha() <= 0.0f){
-        // Remove that exploder-particle
-        exploders.erase(exploders.begin() + i);
-      }
-    }
-
+      DrawTexturePro(canvas.texture, (Rectangle){0, 0, (float)canvas.texture.width, (float)-canvas.texture.height},
+                       (Rectangle){0, 0, WINDOW_WIDTH, WINDOW_HEIGHT}, (Vector2){0, 0}, 0, WHITE);
     EndDrawing();
   }
 	
