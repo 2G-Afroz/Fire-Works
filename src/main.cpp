@@ -13,9 +13,9 @@ float map(float value, float fromLow, float fromHigh, float toLow, float toHigh)
 class Particle {
   private:
     Vector2 pos;
-    Color color;
     Vector2 velocity;
     Vector2 accn;
+    Color color;
     int size;
     float alpha;
     bool exploder;
