@@ -1,7 +1,9 @@
 // main.cpp
 #include <raylib.h>
 #include <vector>
-#define WINDOW_WIDTH 850
+#include "include/Particle2D.h"
+
+#define WINDOW_WIDTH 1450
 #define WINDOW_HEIGHT 850
 
 // Function and Class Definitions
@@ -198,76 +200,16 @@ int main() {
   SetTargetFPS(60);
   ClearBackground(BLACK);
 
-  // Initializing variables
-  std::vector<Particle> crackers;
-  std::vector<Particle> exploders;
-  RenderTexture2D canvas = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
-  Sound wistle_firework = LoadSound("assets/whistle_firework.wav");
-  Sound brust_firework = LoadSound("assets/brust_firework.wav");
+  // Particle2D Object
+  Particle2D particle({100, 100}, {1, 1}, {0, 0}, 10);
 
   // Main game loop
   while (!WindowShouldClose()) {
-    // Adding crackers
-    if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-      explodeHeart(exploders, {(float)GetMouseX(), (float)GetMouseY()}, WHITE, wistle_firework, brust_firework);
-    }
-    if(GetRandomValue(0, 100) < 3) {
-      crackers.push_back(
-        Particle(
-          {(float)GetRandomValue(0, WINDOW_WIDTH), WINDOW_HEIGHT}, 
-          {0, GetRandomValue(150, 300)/1000.0f},
-          {0, (float)GetRandomValue(13, 18)},
-          ColorFromHSV(GetRandomValue(0, 360), 1, 1),
-          wistle_firework,
-          brust_firework,
-          false
-        )
-      );
-    }
-
-    // Drawing on Texture
-    BeginTextureMode(canvas);
-      DrawRectangle(0,0,WINDOW_WIDTH, WINDOW_HEIGHT, ColorAlpha(BLACK, 0.45));
-      DrawText("Hello, 2G-Afroz!", 10, 10, 20, WHITE);
-
-      // Crackers Loop
-      for(int i = 0; i < crackers.size(); i++){
-        crackers.at(i).update();
-        crackers.at(i).show();
-        if(crackers.at(i).getAccn().y <= 0){
-          // remeove that cracker;
-          PlaySound(brust_firework);
-          int random = GetRandomValue(0, 29);
-          if(random < 10)
-            explodeHeart(exploders, crackers.at(i).getPos(), crackers.at(i).getColor(), wistle_firework, brust_firework);
-          else  if(random < 20)
-                  explodeCircle(exploders, crackers.at(i).getPos(), crackers.at(i).getColor(), wistle_firework, brust_firework);
-              else
-                  explode(exploders, crackers.at(i).getPos(), crackers.at(i).getColor(), wistle_firework, brust_firework);
-          crackers.erase(crackers.begin() + i);
-        }
-      }
-
-      // Exploders Loop
-      for(int i = 0; i < exploders.size(); i++){
-        exploders.at(i).update();
-        exploders.at(i).show();
-
-        if(exploders.at(i).getAlpha() <= 0.0f){
-          // Remove that exploder-particle
-          exploders.erase(exploders.begin() + i);
-        }
-      }
-    EndTextureMode();
-    // Draw
+    ClearBackground(BLACK);
     BeginDrawing();
-      DrawTexturePro(
-        canvas.texture,
-        (Rectangle){0, 0, (float)canvas.texture.width, (float)-canvas.texture.height},
-        (Rectangle){0, 0, WINDOW_WIDTH, WINDOW_HEIGHT},
-        (Vector2){0, 0}, 0,
-        WHITE
-        );
+    
+      particle.update();
+      particle.show();
     EndDrawing();
   }
 	
