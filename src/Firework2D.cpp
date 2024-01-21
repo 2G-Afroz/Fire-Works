@@ -7,7 +7,5 @@ Firework2D::Firework2D(Vector2 position, Vector2 velocity, Vector2 acceleration,
 }
 
 void Firework2D::update() {
-	if(accn.x >= vel.x){
-		Particle2D::update();
-	}
+	SetSoundVolume(wistle, vol -= 0.1)
 }
