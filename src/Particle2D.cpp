@@ -2,7 +2,7 @@
 #include <raylib.h>
 
 
-Particle2D::Particle2D(){
+Particle2D::Particle2D() {
 	this->pos = {0, 0};
 	this->vel = {0, 0};
 	this->accn = {0, 0};

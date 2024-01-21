@@ -2,6 +2,7 @@
 #include <raylib.h>
 #include <vector>
 #include "include/Particle2D.h"
+#include "include/Firework2D.h"
 
 #define WINDOW_WIDTH 1450
 #define WINDOW_HEIGHT 850
@@ -201,15 +202,14 @@ int main() {
   ClearBackground(BLACK);
 
   // Particle2D Object
-  Particle2D particle({100, 100}, {1, 1}, {0, 0}, 10);
+  Firework2D rocket({0, 400}, {-1, 0}, {50, 0}, WHITE, 10, false, LoadSound("assets/whistle_firework.wav"), LoadSound("assets/brust_firework.wav"));
 
   // Main game loop
   while (!WindowShouldClose()) {
     ClearBackground(BLACK);
     BeginDrawing();
-    
-      particle.update();
-      particle.show();
+      rocket.update();
+      rocket.show();
     EndDrawing();
   }
 	

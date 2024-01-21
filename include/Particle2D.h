@@ -15,7 +15,7 @@
 #include <raylib.h>
 
 class Particle2D {
-	private:
+	protected:
 		Vector2 pos, vel, accn;
 		Color color;
 		int size;
