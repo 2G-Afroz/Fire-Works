@@ -207,6 +207,7 @@ int main() {
 
   // Particle2D Object
   std::vector<Firework2D> rockets;
+  std::vector<Particle2D> exploders;
 
   // Main game loop
   while (!WindowShouldClose()) {
@@ -216,7 +217,7 @@ int main() {
           {(float)GetMouseX(), (float)GetMouseY()},
           {0, 0.1},
           {0, -10},
-          WHITE,
+          ColorFromHSV(GetRandomValue(0, 360), 1, 1),
           10,
           false,
           wistle,
@@ -226,11 +227,17 @@ int main() {
     }
     // Erasing rockets
     for(int i=0;i<rockets.size();i++){
-      if(rockets.at(i).getAccn().y >= rockets.at(i).getVelocity().y)
+      if(rockets.at(i).getAccn().y >= rockets.at(i).getVelocity().y){
+        rockets.at(i).explode(exploders);
         rockets.erase(rockets.begin() + i);
+      }
     }
     ClearBackground(BLACK);
     BeginDrawing();
+      for(int i=0;i<exploders.size();i++){
+        exploders.at(i).update();
+        exploders.at(i).show();
+      }
       for(int i=0;i<rockets.size();i++){
         rockets.at(i).update();
         rockets.at(i).show();
