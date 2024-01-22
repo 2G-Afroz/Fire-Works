@@ -1,6 +1,7 @@
 // main.cpp
 #include <raylib.h>
 #include <vector>
+#include <iostream>
 #include "include/Particle2D.h"
 #include "include/Firework2D.h"
 
@@ -207,7 +208,7 @@ int main() {
 
   // Particle2D Object
   std::vector<Firework2D> rockets;
-  std::vector<Particle2D> exploders;
+  std::vector<Firework2D> exploders;
 
   // Main game loop
   while (!WindowShouldClose()) {
@@ -215,25 +216,20 @@ int main() {
       rockets.push_back(
         Firework2D(
           {(float)GetMouseX(), (float)GetMouseY()},
-          {0, 0.1},
-          {0, -10},
+          {0, 0.25},
+          {0, -16},
           ColorFromHSV(GetRandomValue(0, 360), 1, 1),
-          10,
+          2,
           false,
           wistle,
           brust
         )
       );
     }
-    // Erasing rockets
-    for(int i=0;i<rockets.size();i++){
-      if(rockets.at(i).getAccn().y >= rockets.at(i).getVelocity().y){
-        rockets.at(i).explode(exploders);
-        rockets.erase(rockets.begin() + i);
-      }
-    }
+    
     ClearBackground(BLACK);
     BeginDrawing();
+
       for(int i=0;i<exploders.size();i++){
         exploders.at(i).update();
         exploders.at(i).show();
@@ -244,6 +240,22 @@ int main() {
       }
 
     EndDrawing();
+    // Erasing rockets
+    for(int i=0;i<rockets.size();i++){
+      if(rockets.at(i).getAccn().y >= rockets.at(i).getVelocity().y){
+        rockets.at(i).explode(exploders);
+        rockets.erase(rockets.begin() + i);
+      }
+    }
+    // Erasing expoded particles
+    for(int i=0;i<exploders.size();i++){
+      if (exploders.at(i).getColorAlpha() <= 0){
+        exploders.erase(exploders.begin() + i);
+      }
+      
+    }
+
+    std::cout<<"SIZE: "<<exploders.size()<<std::endl;
   }
 	
   // Clean up

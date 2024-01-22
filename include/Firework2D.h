@@ -9,17 +9,21 @@ class Firework2D : public Particle2D {
 		bool exploder;
 		Sound wistle, brust;
 		float initAccnY;
+		float colorAlpha;
 	public:
 		Firework2D(Vector2 position, Vector2 velocity, Vector2 acceleration, Color color , int size, bool exploder, Sound wistle, Sound brust);
 		Firework2D(Vector2 position, Vector2 velocity, Vector2 acceleration, int size, bool exploder, Sound wistle, Sound brust);
 
 		void update();
 
+		void explode(std::vector<Firework2D>& exploders);
+
 		Vector2 getAccn();
 
 		Vector2 getVelocity();
 
-		void explode(std::vector<Particle2D>& exploders);
+		float getColorAlpha();
+
 };
 
 #endif
