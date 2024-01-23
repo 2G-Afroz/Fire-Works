@@ -1,6 +1,4 @@
 #include "../include/Particle2D.h"
-#include <raylib.h>
-
 
 Particle2D::Particle2D() {
 	this->pos = {0, 0};

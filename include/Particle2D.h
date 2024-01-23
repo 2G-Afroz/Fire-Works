@@ -1,6 +1,8 @@
 #ifndef PARTICLE2D_H
 #define PARTICLE2D_H
 
+#include <raylib.h>
+
 /**
  * @file Particle2D.cpp
  * @author Md Afroz Alam (2gafroz.tech)
@@ -12,7 +14,6 @@
  * @copyright Copyright (c) 2024
  * 
  */
-#include <raylib.h>
 
 class Particle2D {
 	protected:

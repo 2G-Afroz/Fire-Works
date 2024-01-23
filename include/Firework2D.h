@@ -2,6 +2,7 @@
 #define FIREWORK2D_H
 
 #include "../include/Particle2D.h"
+#include "../include/Utils.h"
 #include <algorithm>
 
 class Firework2D : public Particle2D {

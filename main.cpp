@@ -1,8 +1,5 @@
 // main.cpp
-#include <raylib.h>
-#include <vector>
 #include <iostream>
-#include "include/Particle2D.h"
 #include "include/Firework2D.h"
 
 #define WINDOW_WIDTH 1450

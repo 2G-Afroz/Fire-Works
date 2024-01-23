@@ -17,5 +17,4 @@
  */
 float map(float value, float fromLow, float fromHigh, float toLow, float toHigh);
 	
-
 #endif
