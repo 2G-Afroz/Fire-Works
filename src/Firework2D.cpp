@@ -20,7 +20,7 @@ void Firework2D::update() {
 		accn.y /= 1.03f;
 		color = ColorAlpha(color, colorAlpha-=0.015);
 	} else {
-		SetSoundVolume(wistle, map(accn.y, 0, initAccnY, 0, 0.5f));
+		SetSoundVolume(wistle, map(accn.y * -1, 0, initAccnY * -1, 0, 0.5f));
 	}
 }
 
