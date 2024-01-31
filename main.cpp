@@ -184,13 +184,13 @@ void explodeHeart(std::vector<Particle> &exploders, Vector2 pos, Color color, So
 }
 
 // Function to map value
-float map(float value, float fromLow, float fromHigh, float toLow, float toHigh) {
-    // Ensure the input value is within the current range
-    value = std::min(std::max(value, fromLow), fromHigh);
+// float map(float value, float fromLow, float fromHigh, float toLow, float toHigh) {
+//     // Ensure the input value is within the current range
+//     value = std::min(std::max(value, fromLow), fromHigh);
 
-    // Map the value to the target range
-    return toLow + (toHigh - toLow) * ((value - fromLow) / (fromHigh - fromLow));
-}
+//     // Map the value to the target range
+//     return toLow + (toHigh - toLow) * ((value - fromLow) / (fromHigh - fromLow));
+// }
 	
 int main() {
   // Initialize raylib
