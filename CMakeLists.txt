@@ -25,6 +25,9 @@ file(
 # Include headers from '/usr/local/include' (raylib.h)
 include_directories("/usr/local/include")
 
+# Copy assets directory to build directory
+file(COPY ${CMAKE_SOURCE_DIR}/assets DESTINATION ${CMAKE_BINARY_DIR})
+
 # Create executable
 add_executable(${PROJECT_NAME} ${SOURCES})
 
