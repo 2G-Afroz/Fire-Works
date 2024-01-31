@@ -42,6 +42,87 @@ void Firework2D::explode(std::vector<Firework2D>& exploders){
 	}
 }
 
+
+void Firework2D::explodeRectangle(std::vector<Firework2D>& exploders) {
+	PlaySound(brust);
+
+	for(int i = 0; i < 600; i++){
+		exploders.push_back(
+			Firework2D(
+				pos,
+				{0, GetRandomValue(180, 220)/1000.0f},
+				{GetRandomValue(-800, 800)/91.0f, (float)GetRandomValue(-1200, 400)/91.0f},
+				color,
+				std::max(1, size/5),
+				true,
+				wistle,
+				brust
+			)
+		);
+	}
+}
+
+void Firework2D::explodeHeart(std::vector<Firework2D>& exploders) {
+	PlaySound(brust);
+
+	// Bottom Heart
+	for(float ang = 0; ang > -PI ; ang-=0.005){
+		// This formula is used to create SuperShape
+		float x = pow(abs(cos(ang)), 2) * GetRandomValue(400, 850)/100.0f  * sgn(cos(ang));
+		float y = pow(abs(sin(ang)), 2) * GetRandomValue(400, 850)/100.0f * sgn(sin(ang));
+    	exploders.push_back(
+			Firework2D(
+				pos,
+				{0, GetRandomValue(180, 220)/1000.0f},
+				{x, y},
+				color,
+				std::max(1, size/5),
+				true,
+				wistle,
+				brust
+			)
+		);
+	}
+	// Left Arc
+	for(float ang = -PI/4; ang < 3 * PI / 4; ang+=0.01){
+		// This formula is used to create SuperShape
+		float x = pow(abs(cos(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(cos(ang));
+		float y = pow(abs(sin(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(sin(ang));
+		exploders.push_back(
+			Firework2D(
+				//{pos.x - 60, pos.y - 60},
+				pos,
+				{0, GetRandomValue(180, 220)/1000.0f},
+				{x + 4, y + 4},
+				color,
+				std::max(1, size/5),
+				true,
+				wistle,
+				brust
+			)
+		);
+	}
+	// Right Arc
+	for(float ang = PI / 4; ang < 5 * PI / 4; ang+=0.01){
+		// This formula is used to create SuperShape
+		float x = pow(abs(cos(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(cos(ang));
+		float y = pow(abs(sin(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(sin(ang));
+		exploders.push_back(
+			Firework2D(
+				//{pos.x - 60, pos.y - 60},
+				pos,
+				{0, GetRandomValue(180, 220)/1000.0f},
+				{x - 4, y + 4},
+				color,
+				std::max(1, size/5),
+				true,
+				wistle,
+				brust
+			)
+		);
+	}
+}
+
 Vector2 Firework2D::getAccn(){
 	return accn;
 }

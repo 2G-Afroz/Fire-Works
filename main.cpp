@@ -240,7 +240,7 @@ int main() {
     // Erasing rockets
     for(int i=0;i<rockets.size();i++){
       if(rockets.at(i).getAccn().y >= rockets.at(i).getVelocity().y){
-        rockets.at(i).explode(exploders);
+        rockets.at(i).explodeHeart(exploders);
         rockets.erase(rockets.begin() + i);
       }
     }
