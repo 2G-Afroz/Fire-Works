@@ -16,5 +16,5 @@
  * @return The mapped value in the target range.
  */
 float map(float value, float fromLow, float fromHigh, float toLow, float toHigh);
-	
+
 #endif

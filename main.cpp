@@ -251,8 +251,6 @@ int main() {
       }
       
     }
-
-    std::cout<<"SIZE: "<<exploders.size()<<std::endl;
   }
 	
   // Clean up
