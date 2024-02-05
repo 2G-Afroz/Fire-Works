@@ -65,15 +65,15 @@ void Firework2D::explodeRectangle(std::vector<Firework2D>& exploders) {
 void Firework2D::explodeHeart(std::vector<Firework2D>& exploders) {
 	PlaySound(brust);
 
-	// Bottom Heart
-	for(float ang = 0; ang > -PI ; ang-=0.005){
+	// Bottom Heart 'V'
+	for(float ang = 0; ang < PI; ang+=0.005){
 		// This formula is used to create SuperShape
 		float x = pow(abs(cos(ang)), 2) * GetRandomValue(400, 850)/100.0f  * sgn(cos(ang));
 		float y = pow(abs(sin(ang)), 2) * GetRandomValue(400, 850)/100.0f * sgn(sin(ang));
     	exploders.push_back(
 			Firework2D(
 				pos,
-				{0, GetRandomValue(180, 220)/1000.0f},
+				{0, GetRandomValue(200, 230)/1000.0f},
 				{x, y},
 				color,
 				std::max(1, size/5),
@@ -84,7 +84,7 @@ void Firework2D::explodeHeart(std::vector<Firework2D>& exploders) {
 		);
 	}
 	// Left Arc
-	for(float ang = -PI/4; ang < 3 * PI / 4; ang+=0.01){
+	for(float ang = 3 * PI / 4; ang < 7 * PI / 4 + 0.5f; ang+=0.01){
 		// This formula is used to create SuperShape
 		float x = pow(abs(cos(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(cos(ang));
 		float y = pow(abs(sin(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(sin(ang));
@@ -93,7 +93,7 @@ void Firework2D::explodeHeart(std::vector<Firework2D>& exploders) {
 				//{pos.x - 60, pos.y - 60},
 				pos,
 				{0, GetRandomValue(180, 220)/1000.0f},
-				{x + 4, y + 4},
+				{x - 3, y - 3},
 				color,
 				std::max(1, size/5),
 				true,
@@ -103,7 +103,7 @@ void Firework2D::explodeHeart(std::vector<Firework2D>& exploders) {
 		);
 	}
 	// Right Arc
-	for(float ang = PI / 4; ang < 5 * PI / 4; ang+=0.01){
+	for(float ang = 5 * PI / 4 - 0.5f; ang < 9 * PI / 4; ang+=0.01){
 		// This formula is used to create SuperShape
 		float x = pow(abs(cos(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(cos(ang));
 		float y = pow(abs(sin(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(sin(ang));
@@ -112,7 +112,7 @@ void Firework2D::explodeHeart(std::vector<Firework2D>& exploders) {
 				//{pos.x - 60, pos.y - 60},
 				pos,
 				{0, GetRandomValue(180, 220)/1000.0f},
-				{x - 4, y + 4},
+				{x + 3, y - 3},
 				color,
 				std::max(1, size/5),
 				true,
