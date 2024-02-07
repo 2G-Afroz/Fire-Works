@@ -22,12 +22,13 @@ int main() {
 
   // Main game loop
   while (!WindowShouldClose()) {
-    if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+    //if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
+    if(GetRandomValue(0,100) < 5){
       rockets.push_back(
         Firework2D(
-          {(float)GetMouseX(), (float)GetMouseY()},
+          {(float)GetRandomValue(0, WINDOW_WIDTH), WINDOW_HEIGHT},
           {0, 0.25},
-          {0, -16},
+          {0, (float)GetRandomValue(-14, -20)},
           ColorFromHSV(GetRandomValue(0, 360), 1, 1),
           2,
           false,
@@ -51,10 +52,18 @@ int main() {
       }
 
     EndDrawing();
-    // Erasing rockets
+    // Erasing rockets and adding particles
     for(int i=0;i<rockets.size();i++){
       if(rockets.at(i).getAccn().y >= rockets.at(i).getVelocity().y){
-        rockets.at(i).explodeHeart(exploders);
+        int prob = GetRandomValue(0, 30);
+        if(prob < 10)
+          rockets.at(i).explodeHeart(exploders);
+        else {
+          if(prob < 20)
+            rockets.at(i).explode(exploders);
+          else
+            rockets.at(i).explodeRectangle(exploders);
+        }
         rockets.erase(rockets.begin() + i);
       }
     }

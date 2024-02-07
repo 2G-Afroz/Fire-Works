@@ -31,7 +31,7 @@ void Firework2D::explode(std::vector<Firework2D>& exploders){
 			Firework2D(
 				pos,
 				{0, 0.1},
-				{cos(a) * GetRandomValue(1, 800)/100, sin(a) * GetRandomValue(1, 800)/100},
+				{cos(a) * GetRandomValue(1, 600)/100, sin(a) * GetRandomValue(1, 600)/100},
 				color,
 				std::max(1, size/5),
 				true,
@@ -42,7 +42,6 @@ void Firework2D::explode(std::vector<Firework2D>& exploders){
 	}
 }
 
-
 void Firework2D::explodeRectangle(std::vector<Firework2D>& exploders) {
 	PlaySound(brust);
 
@@ -51,7 +50,7 @@ void Firework2D::explodeRectangle(std::vector<Firework2D>& exploders) {
 			Firework2D(
 				pos,
 				{0, GetRandomValue(180, 220)/1000.0f},
-				{GetRandomValue(-800, 800)/91.0f, (float)GetRandomValue(-1200, 400)/91.0f},
+				{GetRandomValue(-600, 600)/100.0f, (float)GetRandomValue(-1000, 200)/100.0f},
 				color,
 				std::max(1, size/5),
 				true,
@@ -68,12 +67,12 @@ void Firework2D::explodeHeart(std::vector<Firework2D>& exploders) {
 	// Bottom Heart 'V'
 	for(float ang = 0; ang < PI; ang+=0.005){
 		// This formula is used to create SuperShape
-		float x = pow(abs(cos(ang)), 2) * GetRandomValue(400, 850)/100.0f  * sgn(cos(ang));
-		float y = pow(abs(sin(ang)), 2) * GetRandomValue(400, 850)/100.0f * sgn(sin(ang));
+		float x = pow(abs(cos(ang)), 2) * GetRandomValue(400, 850)/150.0f  * sgn(cos(ang));
+		float y = pow(abs(sin(ang)), 2) * GetRandomValue(400, 850)/150.0f * sgn(sin(ang));
     	exploders.push_back(
 			Firework2D(
 				pos,
-				{0, GetRandomValue(200, 230)/1000.0f},
+				{0, GetRandomValue(280, 310)/2000.0f},
 				{x, y},
 				color,
 				std::max(1, size/5),
@@ -86,14 +85,14 @@ void Firework2D::explodeHeart(std::vector<Firework2D>& exploders) {
 	// Left Arc
 	for(float ang = 3 * PI / 4; ang < 7 * PI / 4 + 0.5f; ang+=0.01){
 		// This formula is used to create SuperShape
-		float x = pow(abs(cos(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(cos(ang));
-		float y = pow(abs(sin(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(sin(ang));
+		float x = pow(abs(cos(ang)), 1) * GetRandomValue(250, 560)/150.0f * sgn(cos(ang));
+		float y = pow(abs(sin(ang)), 1) * GetRandomValue(250, 560)/150.0f * sgn(sin(ang));
 		exploders.push_back(
 			Firework2D(
 				//{pos.x - 60, pos.y - 60},
 				pos,
-				{0, GetRandomValue(180, 220)/1000.0f},
-				{x - 3, y - 3},
+				{0, GetRandomValue(260, 300)/2000.0f},
+				{x - 2.5f, y - 2.2f},
 				color,
 				std::max(1, size/5),
 				true,
@@ -105,14 +104,14 @@ void Firework2D::explodeHeart(std::vector<Firework2D>& exploders) {
 	// Right Arc
 	for(float ang = 5 * PI / 4 - 0.5f; ang < 9 * PI / 4; ang+=0.01){
 		// This formula is used to create SuperShape
-		float x = pow(abs(cos(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(cos(ang));
-		float y = pow(abs(sin(ang)), 1) * GetRandomValue(250, 560)/100.0f * sgn(sin(ang));
+		float x = pow(abs(cos(ang)), 1) * GetRandomValue(250, 560)/150.0f * sgn(cos(ang));
+		float y = pow(abs(sin(ang)), 1) * GetRandomValue(250, 560)/150.0f * sgn(sin(ang));
 		exploders.push_back(
 			Firework2D(
 				//{pos.x - 60, pos.y - 60},
 				pos,
-				{0, GetRandomValue(180, 220)/1000.0f},
-				{x + 3, y - 3},
+				{0, GetRandomValue(260, 300)/2000.0f},
+				{x + 2.5f, y - 2.2f},
 				color,
 				std::max(1, size/5),
 				true,
