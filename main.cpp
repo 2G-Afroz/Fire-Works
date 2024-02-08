@@ -2,15 +2,19 @@
 #include <iostream>
 #include "include/Firework2D.h"
 
-#define WINDOW_WIDTH 1450
-#define WINDOW_HEIGHT 850
+#define WINDOW_WIDTH (float)GetMonitorWidth(0)
+#define WINDOW_HEIGHT (float)GetMonitorHeight(0)
 
 int main() {
   // Initialize raylib
+  SetConfigFlags(FLAG_WINDOW_RESIZABLE);
   InitWindow(WINDOW_WIDTH, WINDOW_HEIGHT, "FireWorks");
   InitAudioDevice();
   SetTargetFPS(60);
   ClearBackground(BLACK);
+
+  // Variables
+  RenderTexture2D canvas = LoadRenderTexture(WINDOW_WIDTH, WINDOW_HEIGHT);
 
   // Resources
   Sound wistle = LoadSound("assets/whistle_firework.wav");
@@ -22,8 +26,9 @@ int main() {
 
   // Main game loop
   while (!WindowShouldClose()) {
+    ClearBackground(BLACK);
     //if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT)){
-    if(GetRandomValue(0,100) < 5){
+    if(GetRandomValue(0,100) < 10){
       rockets.push_back(
         Firework2D(
           {(float)GetRandomValue(0, WINDOW_WIDTH), WINDOW_HEIGHT},
@@ -37,11 +42,9 @@ int main() {
         )
       );
     }
-    
-    ClearBackground(BLACK);
 
-    BeginDrawing();
-
+    BeginTextureMode(canvas);
+      DrawRectangle(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT, ColorAlpha(BLACK, 0.50));
       for(int i=0;i<exploders.size();i++){
         exploders.at(i).update();
         exploders.at(i).show();
@@ -50,8 +53,18 @@ int main() {
         rockets.at(i).update();
         rockets.at(i).show();
       }
+    EndTextureMode();
 
+    BeginDrawing();
+      DrawTextureEx(
+        canvas.texture,
+        {WINDOW_WIDTH, WINDOW_HEIGHT},
+        180,
+        1.0f,
+        WHITE
+      );
     EndDrawing();
+
     // Erasing rockets and adding particles
     for(int i=0;i<rockets.size();i++){
       if(rockets.at(i).getAccn().y >= rockets.at(i).getVelocity().y){
