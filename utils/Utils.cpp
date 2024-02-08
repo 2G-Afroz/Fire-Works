@@ -6,5 +6,8 @@ float map(float value, float fromLow, float fromHigh, float toLow, float toHigh)
 
     // Map the value to the target range
     return toLow + (toHigh - toLow) * ((value - fromLow) / (fromHigh - fromLow));
+}
 
+int sgn(double d){
+	return (d > 0) ? 1 : (d < 0 ? -1 : 1);
 }

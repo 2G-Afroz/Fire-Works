@@ -18,6 +18,8 @@ class Firework2D : public Particle2D {
 		void update();
 
 		void explode(std::vector<Firework2D>& exploders);
+		void explodeRectangle(std::vector<Firework2D>& exploders);
+		void explodeHeart(std::vector<Firework2D>& exploders);
 
 		Vector2 getAccn();
 

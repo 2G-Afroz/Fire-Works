@@ -16,5 +16,13 @@
  * @return The mapped value in the target range.
  */
 float map(float value, float fromLow, float fromHigh, float toLow, float toHigh);
-	
+
+/**
+ * @brief Gives sign of double as (-1 or 1)
+ * 
+ * @param d	The number.
+ * @return int The sign of number as (-1 or 1)
+ */
+int sgn(double d);
+
 #endif
